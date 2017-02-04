@@ -60,7 +60,45 @@ find `k` or hit a list that starts with a value larger than `k`.
 
 ### Generator view
 
-TODO
+You can think of `cubelists` as a list of generators, each eager to
+give you their next number. The generators are queued in the order of
+the number they want to give you.
+
+To get the smallest number, you take the number the first generator is
+trying to give you. Then you put that generator back in the queue in
+the right place (as determined by the next number it wants to give
+you).
+
+Putting a generator into the queue is done with `insert`:
+
+```haskell
+insert :: Ord a => a -> [a] -> [a]
+insert x (y:ys)
+  | x < y = x:y:ys
+  | otherwise = y : insert x ys
+insert x [] = [x]
+```
+
+It relies on the fact the `Ord` instance for lists does the right
+thing: compares the first elements (and then the second elements, and
+so forth, but that won't happen in our use case).
+
+Finally, here's the function that just repeatedly takes the smallest
+number available and calls insert:
+
+```haskell
+merge :: Ord a => [[a]] -> [a]
+merge ((x:xs):xss) = x : merge (insert xs xss)
+merge ([]:xss) = merge xss
+merge [] = []
+```
+
+We can now define
+
+```haskell
+sumsOfCubes :: [Integer]
+sumsOfCubes = merge cubelists
+```
 
 ### Heap view
 
@@ -95,20 +133,7 @@ heap). So I just need to figure out how to add the dangling list to
 the remaining heap.
 
 That's easy: the only invariant I need to respect is that the lists
-are ordered by their first element. This is the `insert` function from
-the source:
-
-```haskell
-insert :: Ord a => a -> [a] -> [a]
-insert x (y:ys)
-  | x < y = x:y:ys
-  | otherwise = y : insert x ys
-insert x [] = [x]
-```
-
-It relies on the fact the `Ord` instance for lists does the right
-thing: compares the first elements (and then the second elements, and
-so forth, but that won't happen in our use case).
+are ordered by their first element. This is the `insert` function.
 
 And here's how you pop using it:
 
@@ -117,14 +142,7 @@ pop :: [[Int]] -> (Int,[[Int]])
 pop ((x:dangle):heap) = (x, insert dangle heap)
 ```
 
-Now you can see that `merge` is just an iterated `pop`:
-
-```haskell
-merge :: Ord a => [[a]] -> [a]
-merge ((x:xs):xss) = x : merge (insert xs xss)
-merge ([]:xss) = merge xss
-merge [] = []
-```
+Now you can see that `merge` is just an iterated `pop`.
 
 ## Performance
 
