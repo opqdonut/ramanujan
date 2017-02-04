@@ -107,11 +107,10 @@ Another way to look at `cubelists` is to see it as a sort of
 Visualize the list of lists as a two dimensional structure:
 
 ```
-+-+-+-...
-| | |
-| | |
-| | |
-. . .
+ +-+-+-+-...
+ | | | |
+ | | | |
+ . . . .
 ```
 
 The smallest number is in the top left corner, and when I further away
