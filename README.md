@@ -1,4 +1,6 @@
-# Ramanujan numbers – an exercise in laziness
+# One weird trick for calculating Ramanujan numbers
+
+or, Ramanujan numbers – an exercise in laziness
 
 ## Definition
 
