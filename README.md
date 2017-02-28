@@ -60,6 +60,22 @@ by their first element. Thus if I want to know if `k` is a sum of two
 cubes I can do it easily: look in every list in `cubelists` until I
 find `k` or hit a list that starts with a value larger than `k`.
 
+This is what cubelists look like:
+
+```
+[[2]
+,[9,16]
+,[28,35,54]
+,[65,72,91,128]
+,[126,133,152,189,250]
+,[217,224,243,280,341,432]
+,[344,351,370,407,468,559,686]
+,[513,520,539,576,637,728,855,1024]
+,[730,737,756,793,854,945,1072,1241,1458]
+,[1001,1008,1027,1064,1125,1216,1343,1512,1729,2000]
+,...]
+```
+
 ### Generator view
 
 You can think of `cubelists` as a list of generators, each eager to
