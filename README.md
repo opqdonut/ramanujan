@@ -142,7 +142,3 @@ pop ((x:dangle):heap) = (x, insert dangle heap)
 ```
 
 Now you can see that `merge` is just an iterated `pop`.
-
-## Performance
-
-TODO
