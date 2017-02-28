@@ -144,3 +144,10 @@ pop ((x:dangle):heap) = (x, insert dangle heap)
 ```
 
 Now you can see that `merge` is just an iterated `pop`.
+
+## See also
+
+[The Genuine Sieve of
+Erastothenes](https://www.cs.hmc.edu/~oneill/papers/Sieve-JFP.pdf) by
+Melissa E. O'Neill presents an infinite sequence of primes using the
+same methodology.
